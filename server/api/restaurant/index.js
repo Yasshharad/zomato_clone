@@ -11,7 +11,25 @@ const Router = express.Router();
  * Access    Public
  * Method    POST
  */
-// Homework
+Router.post("/", async (req, res) => {
+    const { Restaurant } = req.body;
+
+    if (!Restaurant) {
+        return res.status(400).json({
+            success: false,
+            message: "No data provided",
+        });
+    }
+
+    await RestaurantModel.create(Restaurant);
+
+    const allRestaurants = await RestaurantModel.find();
+
+    return res.status(201).json({
+        success: true,
+        data: allRestaurants,
+    });
+})
 
 /**
  * Route     /

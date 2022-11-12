@@ -6,24 +6,29 @@ import ConnectDB from "./database/connection";
 
 import Auth from "./api/auth";
 
+import Food from "./api/food";
+
 dotenv.config();
 
-const zomato = express();
+const zomato_clone = express();
 
-zomato.use(express.json());
+zomato_clone.use(express.json());
 
-zomato.get("/", (req, res) => {
+zomato_clone.get("/", (req, res) => {
     res.json({
         message: "Server is running",
     });
 });
 
 // /auth/signup
-zomato.use("/auth", Auth);
+zomato_clone.use("/auth", Auth);
+
+//  /food
+zomato_clone.use("/food", Food);
 
 const PORT = 4000;
 
-zomato.listen(PORT, () => {
+zomato_clone.listen(PORT, () => {
     ConnectDB()
         .then(() => {
             console.log("Server is running !!!");

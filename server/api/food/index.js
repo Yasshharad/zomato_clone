@@ -5,13 +5,31 @@ import { FoodModel } from "../../database/allModels";
 const Router = express.Router();
 
 /**
- * Route     /:_id
+ * Route     /
  * Des       Create New Food Item
  * Params    none
  * Access    Public
  * Method    POST
  */
-// Homework
+Router.post("/", async (req, res) => {
+    const { Food } = req.body;
+
+    if (!Food) {
+        return res.status(400).json({
+            success: false,
+            message: "No data provided",
+        });
+    }
+
+    await FoodModel.create(Food);
+
+    const allFoods = await FoodModel.find();
+
+    return res.status(201).json({
+        success: true,
+        data: allFoods,
+    });
+})
 
 /**
  * Route     /:_id
@@ -75,7 +93,7 @@ Router.get("/c/:category", async (req, res) => {
 });
 
 // /c/non
-non === non - veg;
-non === nonsdfwae;
+// non === non - veg;
+// non === nonsdfwae;
 
 export default Router;
