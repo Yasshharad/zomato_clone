@@ -1,2 +1,0 @@
-Client Id = 932453660217-8tqku6gvc1uif785m415tuur8a9iseka.apps.googleusercontent.com
-Client Secret = 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
