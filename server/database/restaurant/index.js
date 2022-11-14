@@ -6,13 +6,19 @@ const RestaurantSchema = new mongoose.Schema(
         city: { type: String, required: true },
         address: { type: String, required: true },
         mapLocation: { type: String, required: true },
-        cuisine: [String],
-        restaurantTimings: String,
-        contactNumber: Number,
-        website: String,
-        popularDishes: [String],
-        averageCost: Number,
-        amenties: [String],
+        cuisine: { type: String },
+        restaurantTimings: { type: String },
+        contactNumber: { type: Number },
+        website: {
+            type: String
+        },
+        popularDishes: { type: String },
+        averageCost: {
+            type: Number
+        },
+        amenties: {
+            type: String
+        },
         menuImages: {
             type: mongoose.Types.ObjectId,
             ref: "images",

@@ -1,6 +1,10 @@
 import express from "express";
 
 import { FoodModel } from "../../database/allModels";
+import {
+    validateCategory,
+    validateId,
+} from "../../validation/common.validation";
 
 const Router = express.Router();
 
@@ -31,7 +35,6 @@ Router.post("/", async (req, res) => {
     });
 })
 
-
 /**
  * Route     /:_id
  * Des       Get food based on id
@@ -42,8 +45,11 @@ Router.post("/", async (req, res) => {
 Router.get("/:_id", async (req, res) => {
     try {
         const { _id } = req.params;
-        const foods = FoodModel.findById(_id);
-        return res.json({ foods });
+
+        await validateId(req.params);
+
+        const food = await FoodModel.findById(_id);
+        return res.json({ food });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -59,9 +65,15 @@ Router.get("/:_id", async (req, res) => {
 Router.get("/r/:_id", async (req, res) => {
     try {
         const { _id } = req.params;
+
+        await validateId(req.params);
+
         const foods = await FoodModel.find({
             restaurant: _id,
         });
+
+        // task: food not found return stmt
+
         return res.json({ foods });
     } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -78,6 +90,7 @@ Router.get("/r/:_id", async (req, res) => {
 Router.get("/c/:category", async (req, res) => {
     try {
         const { category } = req.params;
+        await validateCategory(req.params);
         const foods = await FoodModel.find({
             category: { $regex: category, $options: "i" },
         });
