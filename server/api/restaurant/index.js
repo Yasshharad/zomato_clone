@@ -42,12 +42,30 @@ Router.post("/", async (req, res) => {
  * Access    Public
  * Method    GET
  */
+// Router.get("/", async (req, res) => {
+//     try {
+//         // http://localhost:4000/restaurant/?city=ncr
+//         const { city } = req.query;
+
+//         await ValidateRestaurantCity(req.query);
+
+//         const restaurants = await RestaurantModel.find({ city });
+//         if (restaurants.length === 0) {
+//             return res
+//                 .status(404)
+//                 .json({ error: "No restaurant found in this city." });
+//         }
+//         return res.json({ restaurants });
+//     } catch (error) {
+//         return res.status(500).json({ error: error.message });
+//     }
+// });
 Router.get("/", async (req, res) => {
     try {
         // http://localhost:4000/restaurant/?city=ncr
         const { city } = req.query;
 
-        await ValidateRestaurantCity(req.query);
+        // await ValidateRestaurantCity(req.query);
 
         const restaurants = await RestaurantModel.find({ city });
         if (restaurants.length === 0) {
