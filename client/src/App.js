@@ -8,11 +8,11 @@ import Home from "./pages/Home.page";
 import Restaurant from "./pages/Restaurant.page";
 
 // components
-import Overview from "./component/Restaurant/Overview";
-import OrderOnline from "./component/Restaurant/OrderOnline";
-import Menu from "./component/Restaurant/Menu";
-import Reviews from "./component/Restaurant/Reviews";
-import Photos from "./component/Restaurant/Photos";
+import Overview from "./components/Restaurant/Overview";
+import OrderOnline from "./components/Restaurant/OrderOnline";
+import Menu from "./components/Restaurant/Menu";
+import Reviews from "./components/Restaurant/Reviews";
+import Photos from "./components/Restaurant/Photos";
 
 function App() {
   return (
