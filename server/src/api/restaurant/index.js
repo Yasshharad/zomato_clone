@@ -16,23 +16,12 @@ const Router = express.Router();
  * Method    POST
  */
 Router.post("/", async (req, res) => {
-    const { Restaurant } = req.body;
-
-    if (!Restaurant) {
-        return res.status(400).json({
-            success: false,
-            message: "No data provided",
-        });
+    try {
+        const restaurants = await RestaurantModel?.create?.(req.body.restaurant);
+        return res.status(200).json({ restaurants });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
-
-    await RestaurantModel.create(Restaurant);
-
-    const allRestaurants = await RestaurantModel.find();
-
-    return res.status(201).json({
-        success: true,
-        data: allRestaurants,
-    });
 })
 
 /**
@@ -42,24 +31,6 @@ Router.post("/", async (req, res) => {
  * Access    Public
  * Method    GET
  */
-// Router.get("/", async (req, res) => {
-//     try {
-//         // http://localhost:4000/restaurant/?city=ncr
-//         const { city } = req.query;
-
-//         await ValidateRestaurantCity(req.query);
-
-//         const restaurants = await RestaurantModel.find({ city });
-//         if (restaurants.length === 0) {
-//             return res
-//                 .status(404)
-//                 .json({ error: "No restaurant found in this city." });
-//         }
-//         return res.json({ restaurants });
-//     } catch (error) {
-//         return res.status(500).json({ error: error.message });
-//     }
-// });
 Router.get("/", async (req, res) => {
     try {
         // http://localhost:4000/restaurant/?city=ncr

@@ -18,11 +18,11 @@ const FoodSchema = new mongoose.Schema(
                 ref: "foods",
             },
         ],
-        restaurant: {
-            type: mongoose.Types.ObjectId,
-            ref: "restaurants",
-            required: true,
-        },
+        //     restaurant: {
+        //         type: mongoose.Types.ObjectId,
+        //         ref: "restaurants"
+        //         required: true,
+        //     },
     },
     {
         timestamps: true,

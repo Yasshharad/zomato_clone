@@ -16,23 +16,12 @@ const Router = express.Router();
  * Method    POST
  */
 Router.post("/", async (req, res) => {
-    const { Food } = req.body;
-
-    if (!Food) {
-        return res.status(400).json({
-            success: false,
-            message: "No data provided",
-        });
+    try {
+        const foods = await FoodModel.create(req.body.foodItem);
+        return res.status(200).json({ foods });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
-
-    await FoodModel.create(Food);
-
-    const allFoods = await FoodModel.find();
-
-    return res.status(201).json({
-        success: true,
-        data: allFoods,
-    });
 })
 
 /**
