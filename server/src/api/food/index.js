@@ -61,7 +61,10 @@ Router.get("/r/:_id", async (req, res) => {
             restaurant: _id,
         });
 
-        // task: food not found return stmt
+        if (!foods)
+            return res
+                .status(404)
+                .json({ error: `Food not found` });
 
         return res.json({ foods });
     } catch (error) {
