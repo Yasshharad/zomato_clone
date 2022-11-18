@@ -15,24 +15,24 @@ import { useDispatch } from "react-redux";
 import { getRestaurant } from "../redux/reducers/restaurant/restaurant.action";
 
 const Home = () => {
-    const { type } = useParams();
+  const { type } = useParams();
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getRestaurant());
-    }, []);
+  useEffect(() => {
+    dispatch(getRestaurant());
+  }, []);
 
-    return (
-        <>
-            <div className="my-5 mb-20 md:mb-10">
-                {type === "delivery" && <Delivery />}
-                {type === "dining" && <Dining />}
-                {type === "night" && <NightLife />}
-                {type === "nutri" && <Nutrition />}
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="my-5 mb-20 md:mb-10">
+        {type === "delivery" && <Delivery />}
+        {type === "dining" && <Dining />}
+        {type === "night" && <NightLife />}
+        {type === "nutri" && <Nutrition />}
+      </div>
+    </>
+  );
 };
 
 export default HomeLayout(Home);

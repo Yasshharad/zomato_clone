@@ -21,7 +21,7 @@ const RestaurantLayout = ({ children: Component, ...props }) => {
   const [restaurant, setRestaurant] = useState({
     images: [],
     name: "",
-    cuisine: "",
+    cuisine: [],
     address: "",
     restaurantRating: 4.1,
     deliveryRating: 3.2,

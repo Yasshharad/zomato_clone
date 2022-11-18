@@ -3,18 +3,18 @@ import { useParams, useLocation, Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 const Restaurant = () => {
-    const { id } = useParams();
-    const { pathname } = useLocation();
+  const { id } = useParams();
+  const { pathname } = useLocation();
 
-    if (`/restaurant/${id}` === pathname) {
-        return <Navigate to={`/restaurant/${id}/overview`} />;
-    }
+  if (`/restaurant/${id}` === pathname) {
+    return <Navigate to={`/restaurant/${id}/overview`} />;
+  }
 
-    return (
-        <>
-            <Outlet />
-        </>
-    );
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };
 
 export default Restaurant;

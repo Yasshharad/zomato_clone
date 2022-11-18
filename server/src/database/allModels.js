@@ -7,11 +7,11 @@ import { ReviewModel } from "./review";
 import { UserModel } from "./user";
 
 export {
-    FoodModel,
-    ImageModel,
-    MenuModel,
-    OrderModel,
-    RestaurantModel,
-    ReviewModel,
-    UserModel,
+  FoodModel,
+  ImageModel,
+  MenuModel,
+  OrderModel,
+  RestaurantModel,
+  ReviewModel,
+  UserModel,
 };

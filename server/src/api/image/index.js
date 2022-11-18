@@ -20,13 +20,13 @@ const upload = multer({ storage });
  * Method    GET
  */
 Router.get("/:_id", async (req, res) => {
-    try {
-        const image = await ImageModel.findById(req.params._id);
+  try {
+    const image = await ImageModel.findById(req.params._id);
 
-        return res.json({ image });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    return res.json({ image });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -37,31 +37,31 @@ Router.get("/:_id", async (req, res) => {
  * Method    POST
  */
 Router.post("/", upload.single("file"), async (req, res) => {
-    try {
-        const file = req.file;
+  try {
+    const file = req.file;
 
-        const bucketOptions = {
-            Bucket: "zomatoclone123",
-            Key: file.originalname,
-            Body: file.buffer,
-            ContentType: file.mimetype,
-            ACL: "public-read", // Access Control List
-        };
+    const bucketOptions = {
+      Bucket: "zomato-clone-0135",
+      Key: file.originalname,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+      ACL: "public-read", // Access Control List
+    };
 
-        const uploadImage = await s3Upload(bucketOptions);
+    const uploadImage = await s3Upload(bucketOptions);
 
-        const dbUpload = await ImageModel.create({
-            images: [
-                {
-                    location: uploadImage.Location,
-                },
-            ],
-        });
+    const dbUpload = await ImageModel.create({
+      images: [
+        {
+          location: uploadImage.Location,
+        },
+      ],
+    });
 
-        return res.status(200).json({ dbUpload });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    return res.status(200).json({ dbUpload });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 });
 
 // Router.post("/", upload.array("file", 4), async (req, res) => {
@@ -69,7 +69,7 @@ Router.post("/", upload.single("file"), async (req, res) => {
 //     const file = req.files;
 
 //     const bucketOptions = {
-//       Bucket: "zomatoclone123",
+//       Bucket: "zomato-clone-10567",
 //       Key: file.originalname,
 //       Body: file.buffer,
 //       ContentType: file.mimetype,

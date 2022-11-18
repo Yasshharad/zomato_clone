@@ -10,13 +10,13 @@ import food from "./food/food.reducer";
 import cart from "./cart/cart.reducer";
 
 const rootReducer = combineReducers({
-    auth,
-    user,
-    restaurant,
-    image,
-    review,
-    food,
-    cart,
+  auth,
+  user,
+  restaurant,
+  image,
+  review,
+  food,
+  cart,
 });
 
 export default rootReducer;

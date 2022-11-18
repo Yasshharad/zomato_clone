@@ -2,8 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import passport from "passport";
 import session from "express-session";
-import cors from 'cors';
-import helmet from 'helmet';
+const cors = require('cors');
 
 // Private route authorization config
 import privateRouteConfig from "./config/route.config";
@@ -27,20 +26,24 @@ privateRouteConfig(passport);
 googleAuthConfig(passport);
 
 const zomato = express();
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,            //access-control-allow-credentials:true
+  optionSuccessStatus: 200
+}
 
 // adding additional passport configuration
 
-zomato.use(cors({ origin: "http://localhost:3000" }));
-zomato.use(helmet());
+zomato.use(cors(corsOptions));
 zomato.use(express.json());
 zomato.use(session({ secret: process.env.JWTSECRET }));
 zomato.use(passport.initialize());
 zomato.use(passport.session());
 
 zomato.get("/", (req, res) => {
-    res.json({
-        message: "Server is running",
-    });
+  res.json({
+    message: "Server is running",
+  });
 });
 
 // /auth/signup
@@ -56,12 +59,12 @@ zomato.use("/image", Image);
 const PORT = 4000;
 
 zomato.listen(PORT, () => {
-    ConnectDB()
-        .then(() => {
-            console.log("Server is running !!!");
-        })
-        .catch((error) => {
-            console.log("Server is running, but database connection failed...");
-            console.log(error);
-        });
+  ConnectDB()
+    .then(() => {
+      console.log("Server is running !!!");
+    })
+    .catch((error) => {
+      console.log("Server is running, but database connection failed...");
+      console.log(error);
+    });
 });

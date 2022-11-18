@@ -13,16 +13,16 @@ const Router = express.Router();
  * Method    GET
  */
 Router.get("/:resId", async (req, res) => {
-    try {
-        const { resId } = req.params;
-        const reviews = await ReviewModel.find({ restaurants: resId }).sort({
-            createdAt: -1,
-        });
+  try {
+    const { resId } = req.params;
+    const reviews = await ReviewModel.find({ restaurants: resId }).sort({
+      createdAt: -1,
+    });
 
-        return res.json({ reviews });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    return res.json({ reviews });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -33,20 +33,20 @@ Router.get("/:resId", async (req, res) => {
  * Method    POST
  */
 Router.post(
-    "/new",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-        try {
-            const { _id } = req.user;
-            const { reviewData } = req.body;
+  "/new",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { _id } = req.user;
+      const { reviewData } = req.body;
 
-            const review = await ReviewModel.create({ ...reviewData, user: _id });
+      const review = await ReviewModel.create({ ...reviewData, user: _id });
 
-            return res.json({ review });
-        } catch (error) {
-            return res.status(500).json({ error: error.message });
-        }
+      return res.json({ review });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
+  }
 );
 
 /**
@@ -57,27 +57,27 @@ Router.post(
  * Method    Delete
  */
 Router.delete(
-    "/delete/:id",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-        try {
-            const { user } = req;
-            const { id } = req.params;
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { user } = req;
+      const { id } = req.params;
 
-            const data = await ReviewModel.findOneAndDelete({
-                _id: id,
-                user: user._id,
-            });
+      const data = await ReviewModel.findOneAndDelete({
+        _id: id,
+        user: user._id,
+      });
 
-            if (!data) {
-                return res.json({ message: "Review was not deleted" });
-            }
+      if (!data) {
+        return res.json({ message: "Review was not deleted" });
+      }
 
-            return res.json({ message: "Successfully deleted the review.", data });
-        } catch (error) {
-            return res.status(500).json({ error: error.message });
-        }
+      return res.json({ message: "Successfully deleted the review.", data });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
+  }
 );
 
 export default Router;

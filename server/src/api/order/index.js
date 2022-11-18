@@ -13,23 +13,23 @@ const Router = express.Router();
  * Method    GET
  */
 Router.get(
-    "/",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-        try {
-            const { user } = req;
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { user } = req;
 
-            const getOrders = await OrderModel.findOne({ user: user._id });
+      const getOrders = await OrderModel.findOne({ user: user._id });
 
-            if (!getOrders) {
-                return res.status(400).json({ error: "User not found" });
-            }
+      if (!getOrders) {
+        return res.status(400).json({ error: "User not found" });
+      }
 
-            return res.status(200).json({ orders: getOrders });
-        } catch (error) {
-            return res.status(500).json({ error: error.message });
-        }
+      return res.status(200).json({ orders: getOrders });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
+  }
 );
 
 /**
@@ -40,35 +40,35 @@ Router.get(
  * Method    PUT
  */
 Router.put(
-    "/new",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-        try {
-            const { user } = req;
+  "/new",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { user } = req;
 
-            const { orderDetails } = req.body;
+      const { orderDetails } = req.body;
 
-            // Task: Validate orderDetails
+      // Task: Validate orderDetails
 
-            const addNewOrder = await OrderModel.findOneAndUpdate(
-                {
-                    user: user._id,
-                },
-                {
-                    $push: {
-                        orderDetails: orderDetails,
-                    },
-                },
-                {
-                    new: true,
-                }
-            );
-
-            return res.json({ order: addNewOrder });
-        } catch (error) {
-            return res.status(500).json({ error: error.message });
+      const addNewOrder = await OrderModel.findOneAndUpdate(
+        {
+          user: user._id,
+        },
+        {
+          $push: {
+            orderDetails: orderDetails,
+          },
+        },
+        {
+          new: true,
         }
+      );
+
+      return res.json({ order: addNewOrder });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
+  }
 );
 
 export default Router;
