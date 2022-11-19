@@ -4,8 +4,6 @@
 /server/.dockerignore
 /server/Dockerfile
 
-nginx
-
 /server/dist
 /client/node_modules
 /client/package-lock.json
