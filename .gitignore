@@ -4,7 +4,7 @@
 /server/.dockerignore
 /server/Dockerfile
 
-/nginx
+nginx
 
 /server/dist
 /client/node_modules
