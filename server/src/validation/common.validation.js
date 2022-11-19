@@ -24,10 +24,17 @@ export const validateCategory = (category) => {
   return Schema.validateAsync(id);
 };
 
-export const userInfo =(userData)=>{
+export const userInfo = (userData) => {
   const schema = join.object({
     _id: joi.string().required(),
     password: joi.string().pattern(new RegExp("[a-zA-Z0-9]{3,30}$")),
   })
   return schema.validateAsync(userData);
+}
+
+export const validateOrder = (order) => {
+  const schema = joi.object({
+    razorpay_payment_id: joi.string().required(),
+  });
+  return schema.validateAsync(order);
 }

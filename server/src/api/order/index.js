@@ -2,6 +2,7 @@ import express from "express";
 import passport from "passport";
 
 import { OrderModel } from "../../database/allModels";
+import { validateOrder } from "../../validation/common.validation";
 
 const Router = express.Router();
 
@@ -49,6 +50,7 @@ Router.put(
       const { orderDetails } = req.body;
 
       // Task: Validate orderDetails
+      await validateOrder(req.body.credentials);
 
       const addNewOrder = await OrderModel.findOneAndUpdate(
         {
